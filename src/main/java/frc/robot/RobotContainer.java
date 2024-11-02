@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+
 import edu.wpi.first.wpilibj2.command.Command;
 
 
@@ -26,12 +29,15 @@ public class RobotContainer {
 
   private final XboxController driveController = new XboxController(Constants.driverXboxControllerPort);
   
+  private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+
   private final XboxController operatorController = new XboxController(Constants.operatorXboxControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
     driveSubsystem.setDefaultCommand(
             new RunCommand(
                     () -> {
@@ -40,8 +46,18 @@ public class RobotContainer {
                     }
             , driveSubsystem)
     );
+
+    conveyorSubsystem.setDefaultCommand(
+    new RunCommand(
+            () -> {
+                conveyorSubsystem.rotateConveyor(Constants.maxMotorOutput*operatorController.getLeftY());
+            }
+            , conveyorSubsystem
+        )
+    );
   
   }
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
