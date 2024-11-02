@@ -18,6 +18,7 @@ public final class Constants {
     public static final int rightFollowerCANID = 5;
     public static final int leftLeaderCANID = 7;
     public static final int leftFollowerCANID = 8;
+    public static final int conveyorMotor = 9;
     //The controller ports can be changed in driverstation
     public static final int driverXboxControllerPort = 0;
     public static final int operatorXboxControllerPort = 1;
