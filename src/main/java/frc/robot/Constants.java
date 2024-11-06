@@ -28,4 +28,7 @@ public final class Constants {
     The number is negative because xbox controllers are down-right positve
     */
     public static final double maxMotorOutput = -0.55;
+
+    //conveyor motor output
+    public static final double conveyorOutput = 1;
 }

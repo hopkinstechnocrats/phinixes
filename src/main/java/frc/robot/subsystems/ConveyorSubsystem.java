@@ -28,4 +28,8 @@ public class ConveyorSubsystem extends SubsystemBase{
     public void rotateConveyor(double motorSpeed) {
         conveyorMotor.set(motorSpeed);
     }
+
+    public void brake() {
+        conveyorMotor.stopMotor();
+    }
 }
