@@ -14,15 +14,15 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.subsystems.ConveyorSubsystem;
+import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
-import frc.robot.commands.conveyorCommands;
+import frc.robot.commands.LauncherCommands;
 import frc.robot.autos.Autos;
-import frc.robot.commands.DriveCommands;
+//import frc.robot.commands.DriveCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+//import edu.wpi.first.wpilibj2.command.Commands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,22 +32,16 @@ import edu.wpi.first.wpilibj2.command.Commands;
  */
 public class RobotContainer {
 
-    //variables for which auto to use
-    private static final String kRotateClockwise = "Default";
-    private static final String kRotateCounterclockwise = "My Auto";
-    private String m_autoSelected;
-    private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
 
 
     // The robot's subsystems and commands are defined here...
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
-    private final Autos autos = new Autos();
+    //private final Autos autos = new Autos();
 
     private final XboxController driveController = new XboxController(Constants.driverXboxControllerPort);
   
-    private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+    private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
 
     private final CommandXboxController operatorController = new CommandXboxController(Constants.operatorXboxControllerPort);
 
@@ -67,12 +61,12 @@ public class RobotContainer {
         , driveSubsystem)
     );
 
-    conveyorSubsystem.setDefaultCommand(
+    launcherSubsystem.setDefaultCommand(
     new RunCommand(
             () -> {
-                conveyorSubsystem.brake();
+                launcherSubsystem.brake();
             }
-            , conveyorSubsystem
+            , launcherSubsystem
         )
     );
   
@@ -85,10 +79,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    operatorController.a().whileTrue(conveyorCommands.rotateConveyor(conveyorSubsystem));
-    
-}
+    private void configureButtonBindings() {
+        operatorController.a().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, 1));
+        operatorController.b().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, -1));
+
+        operatorController.x().onTrue(LauncherCommands.fire(launcherSubsystem));
+    }
    
   
 
@@ -104,6 +100,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return Void;//TODO return auto chooser
+    return Autos.selectedAuto();//TODO return auto chooser
   }
 }

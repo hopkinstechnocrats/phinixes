@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.DriveCommands;
-import frc.robot.commands.conveyorCommands;
+import frc.robot.commands.LauncherCommands;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Autos {
@@ -38,6 +38,10 @@ public class Autos {
         SmartDashboard.putData("Are you starting on the left or right side of the field?", m_autoChooser);
 
         return m_autoChooser.getSelected();
+    }
+
+    public static Command selectedAuto(){
+        return selectedAuto();
     }
     
     /*public void runAuto () {
