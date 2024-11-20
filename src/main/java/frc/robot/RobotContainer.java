@@ -37,7 +37,7 @@ public class RobotContainer {
     // The robot's subsystems and commands are defined here...
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
-    //private final Autos autos = new Autos();
+    private final Autos autos = new Autos();
 
     private final XboxController driveController = new XboxController(Constants.driverXboxControllerPort);
   
@@ -100,6 +100,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return Autos.selectedAuto();//TODO return auto chooser
+    return autos.selectAuto();
   }
 }

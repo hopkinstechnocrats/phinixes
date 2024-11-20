@@ -39,10 +39,6 @@ public class Autos {
 
         return m_autoChooser.getSelected();
     }
-
-    public static Command selectedAuto(){
-        return selectedAuto();
-    }
     
     /*public void runAuto () {
         m_autoChooser.setDefaultOption("Left", rotateClockwise);
