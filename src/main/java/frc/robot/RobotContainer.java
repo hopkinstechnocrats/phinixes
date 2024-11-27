@@ -80,10 +80,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
     private void configureButtonBindings() {
-        operatorController.a().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, 1));
-        operatorController.b().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, -1));
+        operatorController.a().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, -1));
+        operatorController.b().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, 1));
 
-        operatorController.x().onTrue(LauncherCommands.fire(launcherSubsystem));
+        //operatorController.x().onTrue(LauncherCommands.fire(launcherSubsystem));
     }
    
   

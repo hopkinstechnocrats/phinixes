@@ -12,47 +12,47 @@ public class LauncherSubsystem extends SubsystemBase{
 
     // Initialize all the variables so we can use them later
 
-    WPI_TalonSRX feederMotorLeft;
-    WPI_TalonSRX feederMotorRight;
+    WPI_TalonSRX intakeMotor;
+    WPI_TalonSRX feedMotor;
 
-    WPI_TalonSRX shooterMotorLeft;
-    WPI_TalonSRX shooterMotorRight;
+    WPI_TalonSRX shooterMotorTop;
+    WPI_TalonSRX shooterMotorBottom;
 
     public LauncherSubsystem(){
 		// Create the motors in code
-		feederMotorLeft  = new WPI_TalonSRX(Constants.feederMotorLeft);
-        feederMotorRight = new WPI_TalonSRX(Constants.feederMotorRight);
-        shooterMotorLeft  = new WPI_TalonSRX(Constants.shooterMotorLeft);
-        shooterMotorRight = new WPI_TalonSRX(Constants.shooterMotorRight);
+		intakeMotor  = new WPI_TalonSRX(Constants.intake);
+        feedMotor = new WPI_TalonSRX(Constants.feed);
+        shooterMotorTop  = new WPI_TalonSRX(Constants.shooterMotorTop);
+        shooterMotorBottom = new WPI_TalonSRX(Constants.shooterMotorBottom);
 
 		// Set motors to default settings
-        feederMotorLeft. configFactoryDefault();
-        feederMotorRight.configFactoryDefault();
-        shooterMotorLeft. configFactoryDefault();
-        shooterMotorRight.configFactoryDefault();
+        intakeMotor. configFactoryDefault();
+        feedMotor.configFactoryDefault();
+        shooterMotorTop. configFactoryDefault();
+        shooterMotorBottom.configFactoryDefault();
 
 		// Tell motors to brake when not given any other command
-        feederMotorLeft. setNeutralMode(NeutralMode.Brake);
-        feederMotorRight.setNeutralMode(NeutralMode.Brake);
-        shooterMotorLeft. setNeutralMode(NeutralMode.Brake);
-        shooterMotorRight.setNeutralMode(NeutralMode.Brake);
+        intakeMotor. setNeutralMode(NeutralMode.Brake);
+        feedMotor.setNeutralMode(NeutralMode.Brake);
+        shooterMotorTop. setNeutralMode(NeutralMode.Brake);
+        shooterMotorBottom.setNeutralMode(NeutralMode.Brake);
     }
 
     public void rotateFeeder(double motorSpeed) {
-        feederMotorLeft. set(motorSpeed);
-        feederMotorRight.set(motorSpeed);
+        intakeMotor. set(motorSpeed);
+        feedMotor.set(motorSpeed);
     }
 
     public void brake() {
-        feederMotorLeft. stopMotor();
-        feederMotorRight.stopMotor();
-        shooterMotorLeft. stopMotor();
-        shooterMotorRight.stopMotor();
+        intakeMotor. stopMotor();
+        feedMotor.stopMotor();
+        shooterMotorTop. stopMotor();
+        shooterMotorBottom.stopMotor();
     }
 
     public void shoot(double motorSpeed) {
-        shooterMotorLeft.set(motorSpeed);
-        shooterMotorRight.set(motorSpeed);
+        shooterMotorTop.set(motorSpeed);
+        shooterMotorBottom.set(motorSpeed);
     }
 
     /**public void fire(double feederSpeed, double shooterSpeed) {

@@ -19,12 +19,12 @@ public final class Constants {
     public static final int leftLeaderCANID = 7;
     public static final int leftFollowerCANID = 8;
 
-    public static final int feederMotorLeft  = 9;
-    public static final int feederMotorRight = 10;
+    public static final int intake  = 9;
+    public static final int feed = 10;
 
     //wheels that shoot out the game pieces
-    public static final int shooterMotorLeft  = 11;
-    public static final int shooterMotorRight = 12;
+    public static final int shooterMotorTop  = 11;
+    public static final int shooterMotorBottom = 12;
 
     //The controller ports can be changed in driverstation
     public static final int driverXboxControllerPort = 0;
