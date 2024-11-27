@@ -21,9 +21,9 @@ public class IntakeSubsytem extends SubsystemBase {
         feedMotor.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void intake(double motorSpeed) {
-        intakeMotor.set(motorSpeed);
-        feedMotor.set(motorSpeed);
+    public void intake(double intakeSpeed, double feedSpeed) {
+        intakeMotor.set(intakeSpeed);
+        feedMotor.set(feedSpeed);
     }
 
     public void brake(){

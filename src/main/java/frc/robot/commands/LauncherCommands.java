@@ -19,6 +19,13 @@ public class LauncherCommands {
         }, intakeSubsystem);
     }
 
+    public static Command intake(IntakeSubsytem intakeSubsystem, double direction) {
+        return Commands.run(
+            () -> { 
+            intakeSubsystem.intake(Constants.feederOutput * direction, Constants.feederOutput*-direction);
+        }, intakeSubsystem);
+    }
+
     public static Command spinUpLauncher(LauncherSubsystem launcherSubsystem) {
         return Commands.run(
             () -> { 
