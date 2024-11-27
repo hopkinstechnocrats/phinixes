@@ -12,40 +12,26 @@ public class LauncherSubsystem extends SubsystemBase{
 
     // Initialize all the variables so we can use them later
 
-    WPI_TalonSRX intakeMotor;
-    WPI_TalonSRX feedMotor;
-
+   
     WPI_TalonSRX shooterMotorTop;
     WPI_TalonSRX shooterMotorBottom;
 
     public LauncherSubsystem(){
 		// Create the motors in code
-		intakeMotor  = new WPI_TalonSRX(Constants.intake);
-        feedMotor = new WPI_TalonSRX(Constants.feed);
         shooterMotorTop  = new WPI_TalonSRX(Constants.shooterMotorTop);
         shooterMotorBottom = new WPI_TalonSRX(Constants.shooterMotorBottom);
 
 		// Set motors to default settings
-        intakeMotor. configFactoryDefault();
-        feedMotor.configFactoryDefault();
         shooterMotorTop. configFactoryDefault();
         shooterMotorBottom.configFactoryDefault();
 
 		// Tell motors to brake when not given any other command
-        intakeMotor. setNeutralMode(NeutralMode.Brake);
-        feedMotor.setNeutralMode(NeutralMode.Brake);
         shooterMotorTop. setNeutralMode(NeutralMode.Brake);
         shooterMotorBottom.setNeutralMode(NeutralMode.Brake);
     }
 
-    public void rotateFeeder(double motorSpeed) {
-        intakeMotor. set(motorSpeed);
-        feedMotor.set(motorSpeed);
-    }
 
     public void brake() {
-        intakeMotor. stopMotor();
-        feedMotor.stopMotor();
         shooterMotorTop. stopMotor();
         shooterMotorBottom.stopMotor();
     }
@@ -55,9 +41,4 @@ public class LauncherSubsystem extends SubsystemBase{
         shooterMotorBottom.set(motorSpeed);
     }
 
-    /**public void fire(double feederSpeed, double shooterSpeed) {
-
-        feederMotorLeft. stopMotor();
-        feederMotorRight.stopMotor();
-    } **/
 }
