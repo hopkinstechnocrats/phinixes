@@ -100,6 +100,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return autos.selectAuto();
+    return new SequentialCommandGroup();//autos.selectAuto();
   }
 }

@@ -13,7 +13,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class Autos {
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
     SendableChooser<Command> m_autoChooser = new SendableChooser<>();
-
+/* 
     public Command rotateClockwise =        DriveCommands.drive(driveSubsystem, -1, 1).withTimeout(1);
     public Command rotateCounterclockwise = DriveCommands.drive(driveSubsystem, 1, -1).withTimeout(1);
     public Command moveForward(double time) {return DriveCommands.drive(driveSubsystem, 1, 1).withTimeout(time);};
@@ -49,4 +49,5 @@ public class Autos {
         DriveCommands.drive(driveSubsystem, 1, 1).withTimeout(1);
     }
     */
+    
 }
