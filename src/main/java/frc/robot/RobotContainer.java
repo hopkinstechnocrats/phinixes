@@ -7,15 +7,22 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.subsystems.ConveyorSubsystem;
+import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsytem;
+import frc.robot.commands.LauncherCommands;
+import frc.robot.autos.Autos;
+//import frc.robot.commands.DriveCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+//import edu.wpi.first.wpilibj2.command.Commands;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,35 +31,53 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
-  private final XboxController driveController = new XboxController(Constants.driverXboxControllerPort);
+
+
+    // The robot's subsystems and commands are defined here...
+    private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+
+    private final IntakeSubsytem intakeSubsystem = new IntakeSubsytem();
+
+    private final Autos autos = new Autos();
+
+    private final XboxController driveController = new XboxController(Constants.driverXboxControllerPort);
   
-  private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+    private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
 
-  private final XboxController operatorController = new XboxController(Constants.operatorXboxControllerPort);
+    private final CommandXboxController operatorController = new CommandXboxController(Constants.operatorXboxControllerPort);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+    /** The container for the robot. Contains subsystems, OI devices, and commands. */
+    public RobotContainer() {
+
+
     // Configure the button bindings
     configureButtonBindings();
 
     driveSubsystem.setDefaultCommand(
             new RunCommand(
-                    () -> {
-                      driveSubsystem.drive(Constants.maxMotorOutput*driveController.getLeftY(),
-                      Constants.maxMotorOutput*driveController.getRightY());
-                    }
-            , driveSubsystem)
+                () -> {
+                  driveSubsystem.drive(Constants.maxMotorOutput*driveController.getLeftY(),
+                  Constants.maxMotorOutput*driveController.getRightY());
+                }
+        , driveSubsystem)
     );
 
-    conveyorSubsystem.setDefaultCommand(
+    launcherSubsystem.setDefaultCommand(
     new RunCommand(
             () -> {
-                conveyorSubsystem.rotateConveyor(Constants.maxMotorOutput*operatorController.getLeftY());
+                launcherSubsystem.brake();
             }
-            , conveyorSubsystem
+            , launcherSubsystem
+        )
+    );
+
+    intakeSubsystem.setDefaultCommand(
+      new RunCommand(
+            () -> {
+                intakeSubsystem.brake();
+            }
+            , intakeSubsystem
         )
     );
   
@@ -65,13 +90,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    JoystickButton aButton = new JoystickButton(operatorController, 1);
-    JoystickButton bButton = new JoystickButton(operatorController, 2);
-    JoystickButton aDriverButton = new JoystickButton(driveController, 1);
-    JoystickButton bDriverButton = new JoystickButton(driveController, 2);
-    
-  }
+    private void configureButtonBindings() {
+        operatorController.a().whileTrue(LauncherCommands.intake(intakeSubsystem, -1));
+        operatorController.b().whileTrue(LauncherCommands.intake(intakeSubsystem, 1));
+
+        //operatorController.x().onTrue(LauncherCommands.fire(launcherSubsystem));
+    }
    
   
 
@@ -87,8 +111,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new SequentialCommandGroup(
-      //put commands here
-    );
+    return autos.selectAuto();
   }
 }
