@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-
+import frc.robot.subsystems.IntakeSubsytem;
 import frc.robot.commands.LauncherCommands;
 import frc.robot.autos.Autos;
 //import frc.robot.commands.DriveCommands;
@@ -36,6 +36,8 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
+
+    private final IntakeSubsytem intakeSubsystem = new IntakeSubsytem();
 
     private final Autos autos = new Autos();
 
@@ -69,6 +71,15 @@ public class RobotContainer {
             , launcherSubsystem
         )
     );
+
+    intakeSubsystem.setDefaultCommand(
+      new RunCommand(
+            () -> {
+                intakeSubsystem.brake();
+            }
+            , intakeSubsystem
+        )
+    );
   
   }
 
@@ -80,8 +91,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
     private void configureButtonBindings() {
-        operatorController.a().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, -1));
-        operatorController.b().whileTrue(LauncherCommands.rotateFeeder(launcherSubsystem, 1));
+        operatorController.a().whileTrue(LauncherCommands.intake(intakeSubsystem, -1));
+        operatorController.b().whileTrue(LauncherCommands.intake(intakeSubsystem, 1));
 
         //operatorController.x().onTrue(LauncherCommands.fire(launcherSubsystem));
     }
