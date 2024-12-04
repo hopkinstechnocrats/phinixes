@@ -26,11 +26,11 @@ public class LauncherCommands {
 
     public static Command doNothing() {return Commands.run(() -> {});};
 
-    /*public static Command fire(LauncherSubsystem launcherSubsystem) {
+    public static Command fire(LauncherSubsystem launcherSubsystem) {
         return new ParallelCommandGroup(
             rotateFeeder(launcherSubsystem, 1).withTimeout(1),
             doNothing().withTimeout(.5).andThen(shoot(launcherSubsystem).withTimeout(.5))
         );
     }
-    */
+    
 }
