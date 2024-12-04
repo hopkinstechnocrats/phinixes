@@ -9,7 +9,7 @@ import frc.robot.Constants;
 
 
 public class DriveCommands {
-    public static Command drive(DriveSubsystem m_driveSubsystem, double left, double right) {
+   public static Command drive(DriveSubsystem m_driveSubsystem, double left, double right) {
         return Commands.run(
             () -> { 
             m_driveSubsystem.drive(Constants.maxMotorOutput*left, Constants.maxMotorOutput*right);

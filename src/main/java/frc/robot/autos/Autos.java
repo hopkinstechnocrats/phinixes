@@ -13,7 +13,7 @@ import frc.robot.subsystems.DriveSubsystem;
 public class Autos {
     private final DriveSubsystem driveSubsystem = new DriveSubsystem();
     SendableChooser<Command> m_autoChooser = new SendableChooser<>();
-
+ 
     public Command rotateClockwise =        DriveCommands.drive(driveSubsystem, -1, 1).withTimeout(1);
     public Command rotateCounterclockwise = DriveCommands.drive(driveSubsystem, 1, -1).withTimeout(1);
     public Command moveForward(double time) {return DriveCommands.drive(driveSubsystem, 1, 1).withTimeout(time);};
@@ -40,7 +40,7 @@ public class Autos {
         return m_autoChooser.getSelected();
     }
     
-    /*public void runAuto () {
+    public void runAuto () {
         m_autoChooser.setDefaultOption("Left", rotateClockwise);
         m_autoChooser.addOption("Right", rotateCounterclockwise);
         SmartDashboard.putData("Are you starting on the left or right side of the field?", m_autoChooser);
@@ -48,5 +48,6 @@ public class Autos {
 
         DriveCommands.drive(driveSubsystem, 1, 1).withTimeout(1);
     }
-    */
+    
+    
 }

@@ -40,6 +40,7 @@ public class LauncherCommands {
         }, launcherSubsystem);
     }
 
+
     public static Command fire(LauncherSubsystem launcherSubsystem, IntakeSubsytem intakeSubsytem) {
         return new ParallelCommandGroup(
             rotateFeeder(intakeSubsytem, 1).withTimeout(1),

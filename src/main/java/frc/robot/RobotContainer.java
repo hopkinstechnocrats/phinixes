@@ -58,7 +58,7 @@ public class RobotContainer {
             new RunCommand(
                 () -> {
                   driveSubsystem.drive(Constants.maxMotorOutput*driveController.getLeftY(),
-                  -Constants.maxMotorOutput*driveController.getRightY());
+                  Constants.maxMotorOutput*driveController.getRightY());
                 }
         , driveSubsystem)
     );
