@@ -7,19 +7,19 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Constants;
-import frc.robot.subsystems.IntakeSubsytem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 
 
 public class LauncherCommands {
-    public static Command rotateFeeder(IntakeSubsytem intakeSubsystem, double direction) {
+    public static Command rotateFeeder(IntakeSubsystem intakeSubsystem, double direction) {
         return Commands.run(
             () -> { 
             intakeSubsystem.spinFeeder(Constants.feederOutput * direction);
         }, intakeSubsystem);
     }
 
-    public static Command intake(IntakeSubsytem intakeSubsystem, double direction) {
+    public static Command intake(IntakeSubsystem intakeSubsystem, double direction) {
         return Commands.run(
             () -> { 
             intakeSubsystem.intake(Constants.feederOutput * direction, Constants.feederOutput*-direction);
@@ -40,11 +40,17 @@ public class LauncherCommands {
         }, launcherSubsystem);
     }
 
+    public static Command brakeFeeder(IntakeSubsystem intakeSubsystem){
+        return Commands.run(() -> {
+            intakeSubsystem.brake();
+        }, intakeSubsystem);
+    }
 
-    public static Command fire(LauncherSubsystem launcherSubsystem, IntakeSubsytem intakeSubsytem) {
+
+    public static Command fire(LauncherSubsystem launcherSubsystem, IntakeSubsystem intakeSubsystem) {
         return new ParallelCommandGroup(
-            rotateFeeder(intakeSubsytem, 1).withTimeout(1),
-            brakeLauncher(launcherSubsystem).withTimeout(.5).andThen(spinUpLauncher(launcherSubsystem).withTimeout(.5))
+            spinUpLauncher(launcherSubsystem).withTimeout(1),
+            brakeFeeder(intakeSubsystem).withTimeout(.5).andThen(rotateFeeder(intakeSubsystem,1).withTimeout(.5))
         );
     }
     

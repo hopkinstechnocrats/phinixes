@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class IntakeSubsytem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
     WPI_TalonSRX intakeMotor;
     WPI_TalonSRX feedMotor;
 
-    public IntakeSubsytem(){
+    public IntakeSubsystem(){
         intakeMotor  = new WPI_TalonSRX(Constants.intake);
         feedMotor = new WPI_TalonSRX(Constants.feed);
 

@@ -40,5 +40,5 @@ public final class Constants {
     public static final double feederOutput = 1;
 
     //motor speed for the wheels that shoot out the beach balls
-    public static final double shooterOutput = 1;
+    public static final double shooterOutput = -1;
 }
