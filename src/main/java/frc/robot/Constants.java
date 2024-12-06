@@ -36,9 +36,12 @@ public final class Constants {
     */
     public static final double maxMotorOutput = -0.55;
 
-    //feeder motor output
-    public static final double feederOutput = 1;
+    //feeder motor output (connected to the green lines)
+    public static final double feederOutput = .5;
 
     //motor speed for the wheels that shoot out the beach balls
     public static final double shooterOutput = -1;
+
+    //intake motor output (the black bar)
+    public static final double intakeOutput = 1;
 }

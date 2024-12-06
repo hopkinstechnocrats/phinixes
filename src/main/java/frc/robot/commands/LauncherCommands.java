@@ -22,7 +22,7 @@ public class LauncherCommands {
     public static Command intake(IntakeSubsystem intakeSubsystem, double direction) {
         return Commands.run(
             () -> { 
-            intakeSubsystem.intake(Constants.feederOutput * direction, Constants.feederOutput*-direction);
+            intakeSubsystem.intake(Constants.intakeOutput * direction, Constants.feederOutput * direction);
         }, intakeSubsystem);
     }
 
@@ -49,8 +49,8 @@ public class LauncherCommands {
 
     public static Command fire(LauncherSubsystem launcherSubsystem, IntakeSubsystem intakeSubsystem) {
         return new ParallelCommandGroup(
-            spinUpLauncher(launcherSubsystem).withTimeout(1),
-            brakeFeeder(intakeSubsystem).withTimeout(.5).andThen(rotateFeeder(intakeSubsystem,1).withTimeout(.5))
+            spinUpLauncher(launcherSubsystem).withTimeout(1.5),
+            brakeFeeder(intakeSubsystem).withTimeout(1).andThen(rotateFeeder(intakeSubsystem,1).withTimeout(.5))
         );
     }
     
